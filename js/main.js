@@ -1,3 +1,8 @@
+var SingleJoke = (function () {
+    function SingleJoke() {
+    }
+    return SingleJoke;
+}());
 window.onload = function () {
     var jokeButton = $("getJoke");
     jokeButton.onclick = main;
@@ -14,9 +19,13 @@ function processRequest() {
         alert("Check console for what is sent.");
         var response = JSON.parse(http.responseText);
         console.log(response);
-        console.log(response.type);
-        console.log(response.value.joke);
+        console.log(response.id);
+        console.log(response.joke);
+        console.log(response.categories);
+        displayJoke(response);
     }
+}
+function displayJoke(j) {
 }
 function $(id) {
     return document.getElementById(id);

@@ -1,4 +1,9 @@
-
+class SingleJoke
+{
+    id:number;
+    joke:string;
+    categories:string[];
+}
 
 window.onload = function()
 {
@@ -27,11 +32,18 @@ function processRequest()
     if(http.readyState == 4 && http.status == 200)
     {
         alert("Check console for what is sent.");
-        let response = JSON.parse(http.responseText);
+        let response:SingleJoke = JSON.parse(http.responseText);
         console.log(response);
-        console.log(response.type);
-        console.log(response.value.joke);
+        console.log(response.id);
+        console.log(response.joke);
+        console.log(response.categories);
+        displayJoke(response);
     }
+}
+
+function displayJoke(j:SingleJoke)
+{
+
 }
 
 
