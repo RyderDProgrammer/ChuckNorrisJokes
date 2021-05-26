@@ -1,6 +1,12 @@
 class SingleJoke
 {
+    /**
+     * The ID number that the joke is referenced to.
+     */
     id:number;
+    /**
+     * The joke itself in full form.
+     */
     joke:string;
     categories:string[];
 }
@@ -31,8 +37,8 @@ function processRequest()
     let http = <XMLHttpRequest>this;
     if(http.readyState == 4 && http.status == 200)
     {
-        alert("Check console for what is sent.");
-        let response:SingleJoke = JSON.parse(http.responseText);
+        //alert("Check console for what is sent.");
+        let response:SingleJoke = JSON.parse(http.responseText).value;
         console.log(response);
         console.log(response.id);
         console.log(response.joke);
@@ -43,9 +49,13 @@ function processRequest()
 
 function displayJoke(j:SingleJoke)
 {
+    let displayDiv = $("displayJoke");
+    let jokeIdSpan = <HTMLElement>displayDiv.querySelector("h2 > span");
+    jokeIdSpan.innerText = j.id.toString();
 
+    let jokePara = displayDiv.querySelector("p");
+    jokePara.innerText = j.joke
 }
-
 
 function $(id:string)
 {

@@ -16,8 +16,7 @@ function main() {
 function processRequest() {
     var http = this;
     if (http.readyState == 4 && http.status == 200) {
-        alert("Check console for what is sent.");
-        var response = JSON.parse(http.responseText);
+        var response = JSON.parse(http.responseText).value;
         console.log(response);
         console.log(response.id);
         console.log(response.joke);
@@ -26,6 +25,11 @@ function processRequest() {
     }
 }
 function displayJoke(j) {
+    var displayDiv = $("displayJoke");
+    var jokeIdSpan = displayDiv.querySelector("h2 > span");
+    jokeIdSpan.innerText = j.id.toString();
+    var jokePara = displayDiv.querySelector("p");
+    jokePara.innerText = j.joke;
 }
 function $(id) {
     return document.getElementById(id);
