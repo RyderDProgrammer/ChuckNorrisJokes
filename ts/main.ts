@@ -8,6 +8,10 @@ class SingleJoke
      * The joke itself in full form.
      */
     joke:string;
+    /**
+     * The category that the joke comes from. This example
+     * pulls from the "nerdy" section.
+     */
     categories:string[];
 }
 
@@ -39,9 +43,13 @@ function processRequest()
     {
         //alert("Check console for what is sent.");
         let response:SingleJoke = JSON.parse(http.responseText).value;
+        //Shows off the ENTIRE joke with everything
         console.log(response);
+        //Shows the jokes id
         console.log(response.id);
+        //Shows the joke itself.
         console.log(response.joke);
+        //Shows the category the joke is listed under IE nerdy.
         console.log(response.categories);
         displayJoke(response);
     }
