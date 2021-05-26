@@ -27,7 +27,7 @@ function main()
     //Prepare the request to the server.
     //GET ask the server for data
     //The url is the website we are requesting data from.
-    http.open("GET","http://api.icndb.com/jokes/random?limitTo=[nerdy]")
+    http.open("GET","http://api.icndb.com/jokes/random")//"http://api.icndb.com/jokes/random?limitTo=[nerdy]")
 
     //Function to handle different ready states.
     http.onreadystatechange = processRequest;
@@ -58,11 +58,25 @@ function processRequest()
 function displayJoke(j:SingleJoke)
 {
     let displayDiv = $("displayJoke");
+    //Displays the jokes id
     let jokeIdSpan = <HTMLElement>displayDiv.querySelector("h2 > span");
     jokeIdSpan.innerText = j.id.toString();
 
+    //Displays the jokes text.
     let jokePara = displayDiv.querySelector("p");
-    jokePara.innerText = j.joke
+    jokePara.innerHTML = j.joke
+
+    //Displays the category for the joke
+    let jokeCatList = displayDiv.querySelector("ul");
+    //Erases the list so that it doesnt just show off the same each
+    //time.
+    jokeCatList.innerHTML = "";
+    for(let i = 0; i < j.categories.length; i++)
+    {
+       let nextCat = document.createElement("li"); //<li></li>
+       nextCat.innerText = j.categories[i];//<li> Joke Text Added </li>
+       jokeCatList.appendChild(nextCat);//<ul><li> jokeText added </li></ul>
+    }
 }
 
 function $(id:string)

@@ -9,7 +9,7 @@ window.onload = function () {
 };
 function main() {
     var http = new XMLHttpRequest();
-    http.open("GET", "http://api.icndb.com/jokes/random?limitTo=[nerdy]");
+    http.open("GET", "http://api.icndb.com/jokes/random");
     http.onreadystatechange = processRequest;
     http.send();
 }
@@ -29,7 +29,14 @@ function displayJoke(j) {
     var jokeIdSpan = displayDiv.querySelector("h2 > span");
     jokeIdSpan.innerText = j.id.toString();
     var jokePara = displayDiv.querySelector("p");
-    jokePara.innerText = j.joke;
+    jokePara.innerHTML = j.joke;
+    var jokeCatList = displayDiv.querySelector("ul");
+    jokeCatList.innerHTML = "";
+    for (var i = 0; i < j.categories.length; i++) {
+        var nextCat = document.createElement("li");
+        nextCat.innerText = j.categories[i];
+        jokeCatList.appendChild(nextCat);
+    }
 }
 function $(id) {
     return document.getElementById(id);
