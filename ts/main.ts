@@ -1,3 +1,5 @@
+
+
 window.onload = function()
 {
     let jokeButton = $("getJoke");
@@ -25,7 +27,10 @@ function processRequest()
     if(http.readyState == 4 && http.status == 200)
     {
         alert("Check console for what is sent.");
-        console.log(http.responseText);
+        let response = JSON.parse(http.responseText);
+        console.log(response);
+        console.log(response.type);
+        console.log(response.value.joke);
     }
 }
 
