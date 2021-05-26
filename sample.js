@@ -6,7 +6,6 @@ xhttp.onreadystatechange = function()
     //Response is ready when this if statement is active.
     //The status is meant for the website to have gone through
     //like the HTML Errors such as the common 404 not found page.
-    
     if (this.readyState == 4 && this.status == 200) 
     {
        // Typical action to be performed when the document is ready:
