@@ -102,12 +102,15 @@ function displayCategories()
         let categoryBoxes = "";
         for(let i = 0; i < categories.length; i++)
         {
-            categoryBoxes += "<input type='checkbox' value ='" + categories[i] +
-            "'> <label>" + categories[i] + "</label>";
-            console.log(categoryBoxes);
+            let cat = categories[i];
+            // categoryBoxes += "<input type='checkbox' value ='" + categories[i] +
+            // "'> <label>" + categories[i] + "</label>";
             //Same thing as above just much cleaner looking code.
-            //categoryBoxes += `<input type = "checkbox" value =${categories[i]} id=${categories[i]} <label for ="${categories[i]}">${categories[i]</label>`;
+            categoryBoxes += `<input type="checkbox" value="${cat}" id="${cat}"> <label for="${cat}">${cat}</label>`;
         }
+        console.log(categoryBoxes);
+        let categoriesDiv = $("excludedCategories")
+        categoriesDiv.innerHTML = categoryBoxes;
     }
 }
 

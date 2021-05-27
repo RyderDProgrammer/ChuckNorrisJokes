@@ -53,10 +53,12 @@ function displayCategories() {
         console.log(categories);
         var categoryBoxes = "";
         for (var i = 0; i < categories.length; i++) {
-            categoryBoxes += "<input type='checkbox' value ='" + categories[i] +
-                "'> <label>" + categories[i] + "</label>";
-            console.log(categoryBoxes);
+            var cat = categories[i];
+            categoryBoxes += "<input type=\"checkbox\" value=\"" + cat + "\" id=\"" + cat + "\"> <label for=\"" + cat + "\">" + cat + "</label>";
         }
+        console.log(categoryBoxes);
+        var categoriesDiv = $("excludedCategories");
+        categoriesDiv.innerHTML = categoryBoxes;
     }
 }
 function $(id) {
