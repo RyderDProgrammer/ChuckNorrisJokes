@@ -19,6 +19,7 @@ window.onload = function()
 {
     let jokeButton = $("getJoke");
     jokeButton.onclick = main;
+
     getAllCategories();
 }
 
@@ -84,8 +85,8 @@ function getAllCategories()
 {
     let http = new XMLHttpRequest();
     http.open("GET","https://api.icndb.com/categories");
-    http.onreadystatechange =  displayCategories;
-    http.send
+    http.onreadystatechange = displayCategories;
+    http.send();
 }
 
 function displayCategories()
@@ -94,9 +95,19 @@ function displayCategories()
 
     if(http.readyState == 4 && http.status == 200)
     {
-        let categories = JSON.parse(http.responseText).value;
+        let categories:string[] = JSON.parse(http.responseText).value;
         console.log(http.responseText);
         console.log(categories);
+
+        let categoryBoxes = "";
+        for(let i = 0; i < categories.length; i++)
+        {
+            categoryBoxes += "<input type='checkbox' value ='" + categories[i] +
+            "'> <label>" + categories[i] + "</label>";
+            console.log(categoryBoxes);
+            //Same thing as above just much cleaner looking code.
+            //categoryBoxes += `<input type = "checkbox" value =${categories[i]} id=${categories[i]} <label for ="${categories[i]}">${categories[i]</label>`;
+        }
     }
 }
 

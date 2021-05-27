@@ -43,7 +43,7 @@ function getAllCategories() {
     var http = new XMLHttpRequest();
     http.open("GET", "https://api.icndb.com/categories");
     http.onreadystatechange = displayCategories;
-    http.send;
+    http.send();
 }
 function displayCategories() {
     var http = this;
@@ -51,6 +51,12 @@ function displayCategories() {
         var categories = JSON.parse(http.responseText).value;
         console.log(http.responseText);
         console.log(categories);
+        var categoryBoxes = "";
+        for (var i = 0; i < categories.length; i++) {
+            categoryBoxes += "<input type='checkbox' value ='" + categories[i] +
+                "'> <label>" + categories[i] + "</label>";
+            console.log(categoryBoxes);
+        }
     }
 }
 function $(id) {
