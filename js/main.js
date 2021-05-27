@@ -6,6 +6,7 @@ var SingleJoke = (function () {
 window.onload = function () {
     var jokeButton = $("getJoke");
     jokeButton.onclick = main;
+    getAllCategories();
 };
 function main() {
     var http = new XMLHttpRequest();
@@ -36,6 +37,20 @@ function displayJoke(j) {
         var nextCat = document.createElement("li");
         nextCat.innerText = j.categories[i];
         jokeCatList.appendChild(nextCat);
+    }
+}
+function getAllCategories() {
+    var http = new XMLHttpRequest();
+    http.open("GET", "https://api.icndb.com/categories");
+    http.onreadystatechange = displayCategories;
+    http.send;
+}
+function displayCategories() {
+    var http = this;
+    if (http.readyState == 4 && http.status == 200) {
+        var categories = JSON.parse(http.responseText).value;
+        console.log(http.responseText);
+        console.log(categories);
     }
 }
 function $(id) {

@@ -19,6 +19,7 @@ window.onload = function()
 {
     let jokeButton = $("getJoke");
     jokeButton.onclick = main;
+    getAllCategories();
 }
 
 function main()
@@ -76,6 +77,26 @@ function displayJoke(j:SingleJoke)
        let nextCat = document.createElement("li"); //<li></li>
        nextCat.innerText = j.categories[i];//<li> Joke Text Added </li>
        jokeCatList.appendChild(nextCat);//<ul><li> jokeText added </li></ul>
+    }
+}
+
+function getAllCategories()
+{
+    let http = new XMLHttpRequest();
+    http.open("GET","https://api.icndb.com/categories");
+    http.onreadystatechange =  displayCategories;
+    http.send
+}
+
+function displayCategories()
+{
+    let http = <XMLHttpRequest>this;
+
+    if(http.readyState == 4 && http.status == 200)
+    {
+        let categories = JSON.parse(http.responseText).value;
+        console.log(http.responseText);
+        console.log(categories);
     }
 }
 
