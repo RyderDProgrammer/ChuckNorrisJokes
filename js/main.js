@@ -10,13 +10,14 @@ window.onload = function () {
 };
 function main() {
     var categories = getSelectedCategories();
+    var catString = categories.toString();
     var jokeButton = $("getJoke");
     jokeButton.disabled = true;
     jokeButton.innerText = "Retrieving random joke";
     var displayDiv = $("displayJoke");
     displayDiv.setAttribute("hidden", "hidden");
     var http = new XMLHttpRequest();
-    http.open("GET", "http://api.icndb.com/jokes/random?exclude=[nerdy]");
+    http.open("GET", "http://api.icndb.com/jokes/random?exclude=[" + catString + "]");
     http.onreadystatechange = processRequest;
     http.send();
 }

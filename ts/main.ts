@@ -26,7 +26,7 @@ window.onload = function()
 function main()
 {
     let categories = getSelectedCategories();
-
+    let catString = categories.toString();
 
     let jokeButton = <HTMLButtonElement>$("getJoke");
     jokeButton.disabled = true;
@@ -39,7 +39,7 @@ function main()
     //Prepare the request to the server.
     //GET ask the server for data
     //The url is the website we are requesting data from.
-    http.open("GET","http://api.icndb.com/jokes/random?exclude=[nerdy]")//"http://api.icndb.com/jokes/random?limitTo=[nerdy]")
+    http.open("GET","http://api.icndb.com/jokes/random?exclude=["+catString+"]")
 
     //Function to handle different ready states.
     http.onreadystatechange = processRequest;
