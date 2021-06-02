@@ -39,7 +39,8 @@ function main()
     //Prepare the request to the server.
     //GET ask the server for data
     //The url is the website we are requesting data from.
-    http.open("GET","http://api.icndb.com/jokes/random?exclude=["+catString+"]")
+    let url = "http://api.icndb.com/jokes/random?exclude=["+catString+"]";
+    http.open("GET",url);
 
     //Function to handle different ready states.
     http.onreadystatechange = processRequest;

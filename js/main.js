@@ -17,7 +17,8 @@ function main() {
     var displayDiv = $("displayJoke");
     displayDiv.setAttribute("hidden", "hidden");
     var http = new XMLHttpRequest();
-    http.open("GET", "http://api.icndb.com/jokes/random?exclude=[" + catString + "]");
+    var url = "http://api.icndb.com/jokes/random?exclude=[" + catString + "]";
+    http.open("GET", url);
     http.onreadystatechange = processRequest;
     http.send();
 }
