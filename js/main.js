@@ -9,6 +9,7 @@ window.onload = function () {
     getAllCategories();
 };
 function main() {
+    var selectedCategories = getSelectedCategories();
     var jokeButton = $("getJoke");
     jokeButton.disabled = true;
     jokeButton.innerText = "Retrieving random joke";
@@ -18,6 +19,11 @@ function main() {
     http.open("GET", "http://api.icndb.com/jokes/random");
     http.onreadystatechange = processRequest;
     http.send();
+}
+function getSelectedCategories() {
+    var categoryDiv = $("excludedCategories");
+    var checkBoxes = categoryDiv.querySelectorAll("input[type=checkbox]");
+    console.log(checkBoxes);
 }
 function processRequest() {
     var http = this;

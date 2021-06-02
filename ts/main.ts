@@ -25,6 +25,8 @@ window.onload = function()
 
 function main()
 {
+    let selectedCategories = getSelectedCategories();
+
     let jokeButton = <HTMLButtonElement>$("getJoke");
     jokeButton.disabled = true;
     jokeButton.innerText = "Retrieving random joke";
@@ -43,6 +45,13 @@ function main()
 
     //Sending the request to the server.
     http.send();
+}
+
+function getSelectedCategories()
+{
+    let categoryDiv = $("excludedCategories");
+    let checkBoxes = categoryDiv.querySelectorAll("input[type=checkbox]");
+    console.log(checkBoxes);
 }
 
 function processRequest()
