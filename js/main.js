@@ -9,6 +9,11 @@ window.onload = function () {
     getAllCategories();
 };
 function main() {
+    var jokeButton = $("getJoke");
+    jokeButton.disabled = true;
+    jokeButton.innerText = "Retrieving random joke";
+    var displayDiv = $("displayJoke");
+    displayDiv.setAttribute("hidden", "hidden");
     var http = new XMLHttpRequest();
     http.open("GET", "http://api.icndb.com/jokes/random");
     http.onreadystatechange = processRequest;
@@ -24,9 +29,15 @@ function processRequest() {
         console.log(response.categories);
         displayJoke(response);
     }
+    if (http.readyState == 4) {
+        var jokeButton = $("getJoke");
+        jokeButton.disabled = false;
+        jokeButton.innerText = "Get Random Joke";
+    }
 }
 function displayJoke(j) {
     var displayDiv = $("displayJoke");
+    displayDiv.removeAttribute("hidden");
     var jokeIdSpan = displayDiv.querySelector("h2 > span");
     jokeIdSpan.innerText = j.id.toString();
     var jokePara = displayDiv.querySelector("p");

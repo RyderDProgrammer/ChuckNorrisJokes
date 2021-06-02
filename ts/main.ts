@@ -25,6 +25,13 @@ window.onload = function()
 
 function main()
 {
+    let jokeButton = <HTMLButtonElement>$("getJoke");
+    jokeButton.disabled = true;
+    jokeButton.innerText = "Retrieving random joke";
+
+    let displayDiv = $("displayJoke");
+    displayDiv.setAttribute("hidden","hidden");
+
     let http = new XMLHttpRequest();
     //Prepare the request to the server.
     //GET ask the server for data
@@ -55,11 +62,18 @@ function processRequest()
         console.log(response.categories);
         displayJoke(response);
     }
+    if(http.readyState == 4)
+    {
+        let jokeButton = <HTMLButtonElement>$("getJoke");
+        jokeButton.disabled = false;
+        jokeButton.innerText = "Get Random Joke";
+    }
 }
 
 function displayJoke(j:SingleJoke)
 {
     let displayDiv = $("displayJoke");
+    displayDiv.removeAttribute("hidden");
     //Displays the jokes id
     let jokeIdSpan = <HTMLElement>displayDiv.querySelector("h2 > span");
     jokeIdSpan.innerText = j.id.toString();
