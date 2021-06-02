@@ -25,7 +25,8 @@ window.onload = function()
 
 function main()
 {
-    let selectedCategories = getSelectedCategories();
+    let categories = getSelectedCategories();
+
 
     let jokeButton = <HTMLButtonElement>$("getJoke");
     jokeButton.disabled = true;
@@ -38,7 +39,7 @@ function main()
     //Prepare the request to the server.
     //GET ask the server for data
     //The url is the website we are requesting data from.
-    http.open("GET","http://api.icndb.com/jokes/random")//"http://api.icndb.com/jokes/random?limitTo=[nerdy]")
+    http.open("GET","http://api.icndb.com/jokes/random?exclude=[nerdy]")//"http://api.icndb.com/jokes/random?limitTo=[nerdy]")
 
     //Function to handle different ready states.
     http.onreadystatechange = processRequest;
@@ -51,7 +52,17 @@ function getSelectedCategories()
 {
     let categoryDiv = $("excludedCategories");
     let checkBoxes = categoryDiv.querySelectorAll("input[type=checkbox]");
-    console.log(checkBoxes);
+
+    let selectedCategories = [];
+    for(let i = 0; i < checkBoxes.length; i++)
+    {
+        let currentCategory = <HTMLInputElement>checkBoxes[i];
+        if(currentCategory.checked)
+        {
+            selectedCategories.push(currentCategory.value);
+        }
+    }
+    return selectedCategories;
 }
 
 function processRequest()

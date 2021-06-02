@@ -9,21 +9,28 @@ window.onload = function () {
     getAllCategories();
 };
 function main() {
-    var selectedCategories = getSelectedCategories();
+    var categories = getSelectedCategories();
     var jokeButton = $("getJoke");
     jokeButton.disabled = true;
     jokeButton.innerText = "Retrieving random joke";
     var displayDiv = $("displayJoke");
     displayDiv.setAttribute("hidden", "hidden");
     var http = new XMLHttpRequest();
-    http.open("GET", "http://api.icndb.com/jokes/random");
+    http.open("GET", "http://api.icndb.com/jokes/random?exclude=[nerdy]");
     http.onreadystatechange = processRequest;
     http.send();
 }
 function getSelectedCategories() {
     var categoryDiv = $("excludedCategories");
     var checkBoxes = categoryDiv.querySelectorAll("input[type=checkbox]");
-    console.log(checkBoxes);
+    var selectedCategories = [];
+    for (var i = 0; i < checkBoxes.length; i++) {
+        var currentCategory = checkBoxes[i];
+        if (currentCategory.checked) {
+            selectedCategories.push(currentCategory.value);
+        }
+    }
+    return selectedCategories;
 }
 function processRequest() {
     var http = this;
